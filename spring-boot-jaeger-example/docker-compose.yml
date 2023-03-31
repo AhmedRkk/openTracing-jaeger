@@ -1,0 +1,33 @@
+version: "3.5"
+
+services:
+
+  jaeger-client:
+    build:
+      context: ./jaeger-client
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    depends_on:
+      - jaeger
+
+
+  jaeger-server:
+    build:
+      context: ./jaeger-server
+      dockerfile: Dockerfile
+
+    ports:
+      - "8082:8082"
+    depends_on:
+      - jaeger
+
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+     
+      - "16686:16686"
+      - "14268:14268"
+     
+
